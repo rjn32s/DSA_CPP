@@ -1,0 +1,102 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include <climits>
+using namespace std;
+
+
+int maxtilli(int arr[],int n){
+    int mx=-1999999;
+    for (int i=0;i<n;i++){
+        mx=max(mx,arr[i]);
+        cout <<mx<<endl;
+    }
+}
+
+void sumofallsubarrays(int arr[],int n){
+    
+    for (int i=0;i<n;i++){
+        int sum =0;
+        for (int j=i;j<n;j++){
+            sum += arr[j];
+            cout <<sum<<endl;
+        }
+    }
+}
+
+void longestsubarray(int arr[],int n){
+    int pd =arr[0]-arr[1];
+    int carr=2;
+    int ans=2;
+    for (int i =2;i<n;i++){
+        if (arr[i]-arr[i-1] == pd){
+            carr+=1;
+            
+        }
+        else{
+            pd = arr[i]-arr[i-1];
+            carr=2;
+        }
+        ans = max(ans,carr);
+    }
+    cout<<ans<<endl;
+}
+
+
+void recordbreaker(int a[],int n){
+    int mx = -999999999;
+    int j=0;
+    int counter =0;
+    while( j+1<n){
+        if(a[j]>mx && a[j] > a[j+1]){
+            mx = max(mx,a[j]);
+            counter +=1;
+        }
+        j++;
+    }
+    cout<<"Recod Breakrer days are : "<<counter;
+}
+
+void fristrepetingele(int arr[],int n){
+    const int N = 1e6;
+    int idx[N];
+    for (int i=0;i<N;i++){
+        idx[N] = -1;
+    }
+    int minIdx = INT_MAX;
+    
+    for( int i=0;i<n;i++){
+        if(idx[arr[i]] != -1){
+            minIdx = min(minIdx,idx[arr[i]]);
+        }
+        else{
+            idx[arr[i]] = i;
+        }
+    }
+    
+    if (minIdx == INT_MAX){
+        cout<<"-1"<<endl;
+    }
+    else{
+        cout <<minIdx +1 <<endl;
+    }
+}
+int main() {
+    // Write C++ code here
+    int n;
+    cout << "Enter the number of element in array"<<endl;
+    cin>>n;
+    int arr[n];
+    cout<<"Enter the elements of array"<<endl;
+    
+    for (int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    
+    cout<<"Your array is"<<endl;
+    for (int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    fristrepetingele(arr,n);
+    return 0;
+}
